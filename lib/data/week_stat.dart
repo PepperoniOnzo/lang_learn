@@ -1,11 +1,12 @@
+import 'dart:ffi';
+
 import 'package:lang_learn/data/json_parser.dart';
 
 class WeekStat implements JsonParser {
   List<int>? date;
   List<String>? points;
-  String? avg, todayDown, todayUp;
-
-  final List<String> days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+  double? avg;
+  String?  todayDown, todayUp;
 
   WeekStat({this.date, this.points, this.avg, this.todayDown, this.todayUp});
 
@@ -24,7 +25,7 @@ class WeekStat implements JsonParser {
   void fromJson(Map<String, dynamic> json) {
     date = json['date'].cast<int>();
     points = json['points'].cast<String>();
-    avg = json['avg'];
+    avg = double.tryParse(json['avg']);
     todayDown = json['todayDown'];
     todayUp = json['todayUp'];
   }

@@ -4,47 +4,74 @@ import 'package:lang_learn/data/week_stat.dart';
 
 class DayStat extends StatelessWidget {
   final WeekStat weekStat;
-  final String dayOfWeek = DateFormat('EEE').format(DateTime.now());
+  final String dayOfWeek = DateFormat('d').format(DateTime.now());
+  final String month = DateFormat('MMMM').format(DateTime.now());
 
   DayStat({Key? key, required this.weekStat}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: List.generate(
-            7,
-            (i) => Container(
-                  height: 70,
-                  width: MediaQuery.of(context).size.width * 0.9 / 7,
-                  decoration: weekStat.days[i] == dayOfWeek
-                      ? BoxDecoration(
-                          color: Colors.blue,
-                          borderRadius: BorderRadius.circular(15))
-                      : null,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Text(
-                        weekStat.date![i].toString(),
-
-                        style: const TextStyle(
-                            fontSize: 25, fontWeight: FontWeight.bold),
+    return Padding(
+      padding: const EdgeInsets.all(15.0),
+      child: Row(children: [
+        Column(
+    
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              "$month, $dayOfWeek",
+              style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+            ),
+            Text(weekStat.points!.join(' '))
+          ],
+        ),
+        const Spacer(),
+        Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Row(
+              children: <Widget>[
+                Text(
+                  weekStat.avg.toString(),
+                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                ),
+                weekStat.avg != 0.0
+                    ? weekStat.avg! > 0
+                        ? Icon(Icons.arrow_drop_up)
+                        : Icon(Icons.arrow_drop_down)
+                    : const Text(
+                        "~",
+                        style: TextStyle(
+                            fontSize: 30, fontWeight: FontWeight.bold),
                       ),
-                      Text(weekStat.days[i],
-                          style: const TextStyle(fontSize: 15)),
-                      Row(
-                        children: <Widget>[
-                          Text("${weekStat.points![i]}"),
-                          double.parse(weekStat.points![i]) != 0.0
-                              ? double.parse(weekStat.points![i]) > 0.0
-                                  ? Icon(Icons.arrow_drop_up)
-                                  : Icon(Icons.arrow_drop_down)
-                              : Icon(Icons.numbers)
-                        ],
-                      )
-                    ],
-                  ),
-                )));
+              ],
+            ),
+            const Divider( color: Colors.black, thickness: 2, endIndent: 2, ),
+            Row(         
+              children: [
+                Row(
+                  children: <Widget>[
+                    Text(
+                      weekStat.todayUp.toString()
+                    ),
+                    const Icon(Icons.arrow_drop_up)
+                  ],
+                ),
+                Row(
+                  children: <Widget>[
+                    Text(
+                      weekStat.todayDown.toString()
+                    ),
+                    const Icon(Icons.arrow_drop_down)
+                  ],
+                ),
+              ],
+            )
+          ],
+        )
+      ]),
+    );
   }
 }
+
+// Icons.arrow_drop_up
