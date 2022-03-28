@@ -35,9 +35,9 @@ class DayStat extends StatelessWidget {
                           style: const TextStyle(fontSize: 15)),
                       Row(
                         children: <Widget>[
-                          Text(weekStat.points![i].toString()),
-                          weekStat.points![i] != 0.0
-                              ? weekStat.points![i] > 0.0
+                          Text("${weekStat.points![i]}"),
+                          double.parse(weekStat.points![i]) != 0.0
+                              ? double.parse(weekStat.points![i]) > 0.0
                                   ? Icon(Icons.arrow_drop_up)
                                   : Icon(Icons.arrow_drop_down)
                               : Icon(Icons.numbers)

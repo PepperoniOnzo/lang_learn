@@ -10,10 +10,10 @@ class Data {
 
   Data();
 
-  Future<WeekStat> initAll() async {
+  Future<bool> initAll() async {
     String parsed = await rootBundle.loadString('assets/week.json');
     var parsedJson = jsonDecode(parsed);
     weekStat.fromJson(parsedJson);
-    return weekStat;
+    return true;
   }
 }

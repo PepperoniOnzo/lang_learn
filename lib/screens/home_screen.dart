@@ -14,28 +14,27 @@ class _HomePageState extends State<HomePage> {
   Data data = Data();
 
   @override
-  void initState() {
-    super.initState();
-    data.initAll().then((value) {
-      setState(() {
-        data.weekStat=value;
-      });
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(children: <Widget>[
-        Expanded(
-            flex: 3,
-            child: DayStat(
-              weekStat: data.weekStat,
-            )),
-        Expanded(flex: 1, child: Container()),
-        Expanded(flex: 3, child: Dictionary()),
-        Expanded(flex: 3, child: Learn()),
-      ]),
+      body: FutureBuilder(
+        future: data.initAll(),
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
+          if (snapshot.hasData) {
+            return Column(children: <Widget>[
+              Expanded(
+                  flex: 2,
+                  child: DayStat(
+                    weekStat: data.weekStat,
+                  )),
+              Expanded(flex: 1, child: SwipeWords()),
+              Expanded(flex: 3, child: Dictionary()),
+              Expanded(flex: 3, child: Learn()),
+            ]);
+          } else {
+            return Center(child: CircularProgressIndicator());
+          }
+        },
+      ),
     );
   }
 }
