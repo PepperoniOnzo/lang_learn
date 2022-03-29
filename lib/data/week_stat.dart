@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:lang_learn/data/json_parser.dart';
 
 class WeekStat implements JsonParser {
@@ -20,12 +18,12 @@ class WeekStat implements JsonParser {
     data['todayUp'] = todayUp;
     return data;
   }
-
+  
   @override
   void fromJson(Map<String, dynamic> json) {
     date = json['date'].cast<int>();
     points = json['points'].cast<String>();
-    avg = double.tryParse(json['avg']);
+    avg = json['avg'] as double;
     todayDown = json['todayDown'];
     todayUp = json['todayUp'];
   }

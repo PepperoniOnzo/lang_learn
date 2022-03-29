@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lang_learn/data/data.dart';
+import 'package:lang_learn/data/week_stat.dart';
 
 import '../widgets/widgets.dart';
 
@@ -21,17 +22,35 @@ class _HomePageState extends State<HomePage> {
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.hasData) {
             return Column(children: <Widget>[
+              //need to improve
               Expanded(
                   flex: 2,
                   child: DayStat(
                     weekStat: data.weekStat,
                   )),
-              Expanded(flex: 1, child: SwipeWords()),
-              Expanded(flex: 3, child: Dictionary()),
-              Expanded(flex: 3, child: Learn()),
+              Expanded(flex: 2, child: SwipeWords(dictList: data.dictionary)),
+              Expanded(flex: 3, child: Dictionary(dictList: data.dictionary)),
+              Expanded(
+                  flex: 3,
+                  child: Learn(
+                    words: data.dictionary,
+                  )),
             ]);
           } else {
-            return Center(child: CircularProgressIndicator());
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: const <Widget>[
+                Text('D.',
+                    style:
+                        TextStyle(fontSize: 100, fontWeight: FontWeight.bold)),
+                Center(
+                    child: Center(
+                        child: Text(
+                  'Loading...',
+                  style: TextStyle(fontSize: 30),
+                ))),
+              ],
+            );
           }
         },
       ),

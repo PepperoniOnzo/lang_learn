@@ -14,6 +14,13 @@ class Data {
     String parsed = await rootBundle.loadString('assets/week.json');
     var parsedJson = jsonDecode(parsed);
     weekStat.fromJson(parsedJson);
+
+    parsed = await rootBundle.loadString('assets/words.json');
+    parsedJson = jsonDecode(parsed);
+    dictionary = parsedJson
+        .map<WordTranslate>((json) => WordTranslate.fromJson(json))
+        .toList();
+
     return true;
   }
 }
