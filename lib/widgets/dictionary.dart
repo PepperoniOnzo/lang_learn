@@ -44,7 +44,7 @@ class Dictionary extends StatelessWidget {
                       size: 20,
                     ),
                     Text(
-                        "${dictList.fold<int>(0, (previousValue, element) => element.rate! >= 2 ? previousValue + 1 : previousValue)}",
+                        "${dictList.fold<int>(0, (previousValue, element) => element.rate >= 2 ? previousValue + 1 : previousValue)}",
                         style: TextStyle(color: Colors.white, fontSize: 18)),
                   ],
                 )),
@@ -59,7 +59,7 @@ class Dictionary extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Text(
-                        "${dictList.fold<int>(0, (previousValue, element) => element.rate! < 2 ? previousValue + 1 : previousValue)}",
+                        "${dictList.fold<int>(0, (previousValue, element) => element.rate < 2 ? previousValue + 1 : previousValue)}",
                         style: TextStyle(color: Colors.white, fontSize: 18)),
                     const Icon(
                       Icons.arrow_drop_down,

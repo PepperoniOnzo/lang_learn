@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:lang_learn/data/colors.dart';
 import 'package:lang_learn/data/week_stat.dart';
 
 class DayStat extends StatelessWidget {
@@ -33,9 +34,11 @@ class DayStat extends StatelessWidget {
                       weekStat.points![i].toString(),
                       style: TextStyle(
                           fontSize: 17,
-                          color: double.parse(weekStat.points![i]) > 0
-                              ? Colors.green
-                              : Colors.red),
+                          color: double.parse(weekStat.points![i]) != 0
+                              ? double.parse(weekStat.points![i]) > 0
+                                  ? MyColors.greanMain
+                                  : Colors.red
+                              : Colors.yellow[900]),
                     ),
                   )
               ],
@@ -48,12 +51,31 @@ class DayStat extends StatelessWidget {
           children: [
             Row(
               children: <Widget>[
-                Text(
-                  weekStat.avg.toString(),
-                  style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
-                ),
+                weekStat.avg != 0
+                    ? weekStat.avg > 0
+                        ? Text(
+                            weekStat.avg.toStringAsFixed(1),
+                            style: const TextStyle(
+                                fontSize: 35,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.teal),
+                          )
+                        : Text(
+                            weekStat.avg.toStringAsFixed(1),
+                            style: const TextStyle(
+                                fontSize: 35,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.red),
+                          )
+                    : Text(
+                        weekStat.avg.toStringAsFixed(1),
+                        style: TextStyle(
+                            fontSize: 35,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.yellow[900]),
+                      ),
                 weekStat.avg != 0.0
-                    ? weekStat.avg! > 0
+                    ? weekStat.avg > 0
                         ? const Icon(
                             Icons.arrow_drop_up,
                             size: 35,
@@ -78,15 +100,25 @@ class DayStat extends StatelessWidget {
                 children: [
                   Row(
                     children: <Widget>[
-                      Text(weekStat.todayUp.toString(),
-                          style: TextStyle(fontSize: 17)),
+                      weekStat.todayUp != 0
+                          ? Text(weekStat.todayUp.toStringAsFixed(1),
+                              style: const TextStyle(
+                                  fontSize: 17, color: Colors.teal))
+                          : Text(weekStat.todayUp.toStringAsFixed(1),
+                              style: TextStyle(
+                                  fontSize: 17, color: Colors.yellow[900])),
                       const Icon(Icons.arrow_drop_up)
                     ],
                   ),
                   Row(
                     children: <Widget>[
-                      Text(weekStat.todayDown.toString(),
-                          style: TextStyle(fontSize: 17)),
+                      weekStat.todayDown != 0
+                          ? Text(weekStat.todayDown.toStringAsFixed(1),
+                              style: const TextStyle(
+                                  fontSize: 17, color: Colors.red))
+                          : Text(weekStat.todayDown.toStringAsFixed(1),
+                              style: TextStyle(
+                                  fontSize: 17, color: Colors.yellow[900])),
                       const Icon(Icons.arrow_drop_down)
                     ],
                   ),

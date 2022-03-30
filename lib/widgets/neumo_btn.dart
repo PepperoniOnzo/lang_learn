@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../data/colors.dart';
+
 class NeumoBtn extends StatelessWidget {
   const NeumoBtn({Key? key, required this.callBack, required this.isActive, required this.text})
       : super(key: key);
@@ -16,17 +18,17 @@ class NeumoBtn extends StatelessWidget {
           child: AnimatedContainer(
             duration: const Duration(milliseconds: 200),
             decoration: BoxDecoration(
-                color: Color.fromRGBO(1, 121, 78, 1),
+                color: MyColors.greanMain,
                 borderRadius: BorderRadius.circular(15),
                 boxShadow: isActive
                     ? [
                         const BoxShadow(
-                            color: Color.fromARGB(255, 3, 85, 56),
+                            color: MyColors.greanSecond,
                             offset: Offset(2, 2),
                             blurRadius: 15,
                             spreadRadius: 1),
                         const BoxShadow(
-                            color: Color.fromARGB(255, 104, 173, 149),
+                            color: MyColors.greanThird,
                             offset: Offset(-2, -2),
                             blurRadius: 15,
                             spreadRadius: 1)

@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'package:lang_learn/screens/screens.dart';
-import 'package:lang_learn/screens/sipeable.dart';
+import 'package:lang_learn/screens/swipeable.dart';
 import 'data/routes.dart';
 
 void main() {
@@ -35,3 +35,4 @@ class MyApp extends StatelessWidget {
         });
   }
 }
+

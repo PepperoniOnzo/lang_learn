@@ -5,8 +5,9 @@ import 'package:lang_learn/widgets/widgets.dart';
 import '../data/routes.dart';
 
 class Learn extends StatefulWidget {
-  Learn({Key? key, this.words}) : super(key: key);
+  Learn({Key? key, this.words, required this.modifyData}) : super(key: key);
   List<WordTranslate>? words;
+  Function modifyData;
 
   @override
   State<Learn> createState() => _LearnState();
@@ -14,19 +15,24 @@ class Learn extends StatefulWidget {
 
 class _LearnState extends State<Learn> {
   late int wordsAmount;
-  bool _learn = true, _train = false;
+  bool _learn = true, _practice = false;
   bool _w10 = true, _w25 = false, _w50 = false;
+
+   passModifyData(List<WordTranslate> modDict, double known, double unknown) {
+    widget.modifyData(modDict, known, unknown);            
+  }
+
 
   VoidCallback trainOrPractice() {
     if (_learn) {
       return () => setState(() {
             _learn = false;
-            _train = true;
+            _practice = true;
           });
     } else {
       return () => setState(() {
             _learn = true;
-            _train = false;
+            _practice = false;
           });
     }
   }
@@ -111,7 +117,7 @@ class _LearnState extends State<Learn> {
                           ),
                           NeumoBtn(
                             callBack: trainOrPractice(),
-                            isActive: _train,
+                            isActive: _practice,
                             text: 'Practice',
                           ),
                         ],
@@ -178,7 +184,30 @@ class _LearnState extends State<Learn> {
                     padding: const EdgeInsets.only(right: 10),
                     child: GestureDetector(
                       onTap: () {
-                        Navigator.pushNamed(context, AnyRoutes.swiping);
+                        if (_w10) {
+                          Navigator.pushNamed(context, AnyRoutes.swiping,
+                              arguments: [
+                                passModifyData,
+                                widget.words!.sublist(0, 10),
+                                _practice
+                              ]);
+                          return;
+                        } else if (_w25) {
+                          Navigator.pushNamed(context, AnyRoutes.swiping,
+                              arguments: [
+                                widget.modifyData,
+                                widget.words!.sublist(0, 25),
+                                _practice
+                              ]);
+                          return;
+                        }
+                        Navigator.pushNamed(context, AnyRoutes.swiping,
+                            arguments: [
+                              widget.modifyData,
+                              widget.words!.sublist(0, 50),
+                              _practice
+                            ]);
+                        return;
                       },
                       child:
                           Icon(Icons.play_arrow, color: Colors.white, size: 50),

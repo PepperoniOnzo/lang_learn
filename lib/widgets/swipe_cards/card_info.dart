@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_swipable/flutter_swipable.dart';
 
+import '../../data/colors.dart';
+
 class CardInfo extends StatelessWidget {
   CardInfo();
 
@@ -9,7 +11,7 @@ class CardInfo extends StatelessWidget {
     return Swipable(
         child: Container(
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(15.0), color: Colors.grey[300]),
+          borderRadius: BorderRadius.circular(50.0), color: MyColors.greanMain),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
@@ -20,16 +22,16 @@ class CardInfo extends StatelessWidget {
               children: const [
                 Text(
                   'Unknown',
-                  style: TextStyle(fontSize: 20),
+                  style: TextStyle(fontSize: 20, color: Colors.white),
                 ),
-                Icon(Icons.arrow_left_outlined)
+                Icon(Icons.arrow_left_outlined, color: Colors.white, size: 30),
               ],
             ),
           ),
           const VerticalDivider(
-            color: Colors.black,
-            endIndent: 5,
-            indent: 5,
+            color: Colors.white,
+            endIndent: 10,
+            indent: 10,
             thickness: 2,
           ),
           Expanded(
@@ -37,8 +39,8 @@ class CardInfo extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: const [
-                Text('Known', style: TextStyle(fontSize: 20)),
-                Icon(Icons.arrow_right_outlined)
+                Text('Known', style: TextStyle(fontSize: 20, color: Colors.white)),
+                Icon(Icons.arrow_right_outlined, color: Colors.white, size: 30), 
               ],
             ),
           ),
@@ -46,4 +48,4 @@ class CardInfo extends StatelessWidget {
       ),
     ));
   }
-}
+} 

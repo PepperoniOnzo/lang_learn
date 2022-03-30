@@ -46,7 +46,7 @@ class SwipeWords extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10.0),
               ),
               child: Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(10.0),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
@@ -57,6 +57,7 @@ class SwipeWords extends StatelessWidget {
                         style: const TextStyle( 
                           fontSize: 20.0,
                           fontWeight: FontWeight.bold,
+                          color: Colors.white,
                         ),
                       ),
                     ),
@@ -68,6 +69,7 @@ class SwipeWords extends StatelessWidget {
                         textDirection: TextDirection.rtl,
                         style: const TextStyle(
                           fontSize: 20.0,
+                          color: Colors.white,
                         ),
                       ),
                     ),
