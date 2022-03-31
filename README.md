@@ -1,16 +1,20 @@
-# lang_learn
+# Dictionary
 
-A new Flutter project.
+Flutter project for learning and practicing languages.
 
-## Getting Started
+## About project
 
-This project is a starting point for a Flutter application.
+Functional which now realized:
 
-A few resources to get you started if this is your first Flutter project:
+- Addiing new words to dictionary
+- Practising words
+- Statistics about learned words, and week statistics
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+## What planed to do
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Functional which planed to do:
+
+- Searching words in dictionary
+- Upgrade design
+- Different types of learning
+- Addiing categories for words
