@@ -32,6 +32,7 @@ class MyApp extends StatelessWidget {
         routes: {
           AnyRoutes.home: (context) => HomePage(),
           AnyRoutes.swiping: (context) => SwipAble(),
+          AnyRoutes.dictionaryEdit: (context) => DictEdit(),
         });
   }
 }

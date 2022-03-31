@@ -18,6 +18,14 @@ class _HomePageState extends State<HomePage> {
   _modifyData(List<WordTranslate> modDict, double known, double unknown) {
     setState(() {
       data.modifyData(modDict, known, unknown);
+      data.saveAll();
+    });
+  }
+
+  _modifyDictionary(List<WordTranslate> modDict) {
+    setState(() {
+      data.modifyDictionary(modDict);
+      data.saveAll();
     });
   }
 
@@ -41,7 +49,9 @@ class _HomePageState extends State<HomePage> {
                           child: SwipeWords(dictList: data.dictionary)),
                       Expanded(
                           flex: 3,
-                          child: Dictionary(dictList: data.dictionary)),
+                          child: Dictionary(
+                              dictList: data.dictionary,
+                              modifyDict: _modifyDictionary)),
                       Expanded(
                           flex: 3,
                           child: Learn(
@@ -74,7 +84,11 @@ class _HomePageState extends State<HomePage> {
                       weekStat: data.weekStat,
                     )),
                 Expanded(flex: 2, child: SwipeWords(dictList: data.dictionary)),
-                Expanded(flex: 3, child: Dictionary(dictList: data.dictionary)),
+                Expanded(
+                    flex: 3,
+                    child: Dictionary(
+                        dictList: data.dictionary,
+                        modifyDict: _modifyDictionary)),
                 Expanded(
                     flex: 3,
                     child: Learn(

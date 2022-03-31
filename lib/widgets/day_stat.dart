@@ -23,7 +23,6 @@ class DayStat extends StatelessWidget {
               "$month, $dayOfWeek",
               style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
             ),
-            // Text(weekStat.points!.join(' '))
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [

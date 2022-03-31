@@ -18,6 +18,7 @@ class _SwipAbleState extends State<SwipAble> {
     final arguments = ModalRoute.of(context)?.settings.arguments as List;
     Function modifyData = arguments[0];
     List<WordTranslate> words = arguments[1];
+    words.shuffle();
     bool _isPractice = arguments[2];
 
     endTraining() {
@@ -56,17 +57,45 @@ class _SwipAbleState extends State<SwipAble> {
       );
     }));
     cards.add(CardInfo());
-    return Scaffold(
-      body: Center(
-        child: Container(
-          width: MediaQuery.of(context).size.width * 0.9,
-          height: MediaQuery.of(context).size.height * 0.7,
-          child: Stack(alignment: Alignment.center, children: [
-            CardStat(known: known, unknown: unknown, endTraining: endTraining),
-            Stack(
-              children: cards,
-            ),
-          ]),
+    return WillPopScope(
+      onWillPop: () async {
+        return (await showDialog(
+              context: context,
+              builder: (context) => AlertDialog(              
+                title: Text('Return to main menu?'),
+                content: Text('Your progress will be lost', textAlign: TextAlign.center,),
+                actions: <Widget>[
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      TextButton(
+                    onPressed: () => Navigator.of(context).pop(false),
+                    child:  Text('No'),
+                  ),
+                  TextButton(
+                    onPressed: () => Navigator.of(context).pop(true),
+                    child:  Text('Yes'),
+                  ),
+                    ],
+                  )
+                ],
+              ),
+            )) ??
+            false;
+      },
+      child: Scaffold(
+        body: Center(
+          child: Container(
+            width: MediaQuery.of(context).size.width * 0.9,
+            height: MediaQuery.of(context).size.height * 0.7,
+            child: Stack(alignment: Alignment.center, children: [
+              CardStat(
+                  known: known, unknown: unknown, endTraining: endTraining),
+              Stack(
+                children: cards,
+              ),
+            ]),
+          ),
         ),
       ),
     );

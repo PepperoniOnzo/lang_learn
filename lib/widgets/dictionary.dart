@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:lang_learn/data/routes.dart';
 
 import '../data/word_translate.dart';
 
 class Dictionary extends StatelessWidget {
-  Dictionary({Key? key, required this.dictList}) : super(key: key);
+  Dictionary({Key? key, required this.dictList, required this.modifyDict})
+      : super(key: key);
 
   final List<WordTranslate> dictList;
+  final Function modifyDict;
+
+  _modifyDictionary(List<WordTranslate> modDict) {
+    modifyDict(modDict);
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -19,19 +27,38 @@ class Dictionary extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Text(
-                'Dictionary',
-                style: TextStyle(color: Colors.white, fontSize: 35),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 8),
-              child: Text(
-                "Total words: ${dictList.length.toString()}",
-                style: TextStyle(color: Colors.white, fontSize: 18),
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(
+                        'Dictionary',
+                        style: TextStyle(color: Colors.white, fontSize: 35),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 8),
+                      child: Text(
+                        "Total words: ${dictList.length.toString()}",
+                        style: TextStyle(color: Colors.white, fontSize: 18),
+                      ),
+                    ),
+                  ],
+                ),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(context, AnyRoutes.dictionaryEdit, arguments: [dictList, _modifyDictionary]);
+                  },
+                  child: const Padding(
+                    padding: EdgeInsets.all(25.0),
+                    child: Icon(Icons.edit, color: Colors.white, size: 30),
+                  ),
+                ),
+              ],
             ),
             const Spacer(),
             Padding(
