@@ -11,7 +11,6 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-
 class _HomePageState extends State<HomePage> {
   bool _isInited = false;
   Data data = Data();
@@ -24,9 +23,9 @@ class _HomePageState extends State<HomePage> {
   }
 
   _modifyDictionary(List<WordTranslate> modDict) {
+    setState(() {
       data.modifyDictionary(modDict);
       data.saveAll();
-    setState(() {
     });
   }
 

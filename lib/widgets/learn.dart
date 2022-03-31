@@ -185,7 +185,7 @@ class _LearnState extends State<Learn> {
                     child: GestureDetector(
                       onTap: () {
                         if (_w10) {
-                          Navigator.pushNamed(context, AnyRoutes.swiping,
+                          Navigator.popAndPushNamed(context, AnyRoutes.swiping,
                               arguments: [
                                 passModifyData,
                                 widget.words!.sublist(0, 10),
@@ -193,7 +193,7 @@ class _LearnState extends State<Learn> {
                               ]);
                           return;
                         } else if (_w25) {
-                          Navigator.pushNamed(context, AnyRoutes.swiping,
+                          Navigator.popAndPushNamed(context, AnyRoutes.swiping,
                               arguments: [
                                 widget.modifyData,
                                 widget.words!.sublist(0, 25),
@@ -201,7 +201,7 @@ class _LearnState extends State<Learn> {
                               ]);
                           return;
                         }
-                        Navigator.pushNamed(context, AnyRoutes.swiping,
+                        Navigator.popAndPushNamed(context, AnyRoutes.swiping,
                             arguments: [
                               widget.modifyData,
                               widget.words!.sublist(0, 50),

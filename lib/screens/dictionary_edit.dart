@@ -47,8 +47,10 @@ class _DictEditState extends State<DictEdit> {
 
     return WillPopScope(
       onWillPop: () async {
-        Navigator.pushNamedAndRemoveUntil(
-            context, AnyRoutes.home, ModalRoute.withName(AnyRoutes.home));
+        Navigator.pop(context);
+        setState(() {
+          modifyData(words);
+        });
         return true;
       },
       child: Scaffold(
