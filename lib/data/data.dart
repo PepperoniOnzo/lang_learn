@@ -9,7 +9,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class Data {
   WeekStat weekStat = WeekStat();
-  late List<WordTranslate> dictionary;
+  late List<WordTranslate> dictionary = [];
 
   final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
