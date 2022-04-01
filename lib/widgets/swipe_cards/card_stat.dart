@@ -4,14 +4,16 @@ import 'package:flutter_swipable/flutter_swipable.dart';
 import '../../data/colors.dart';
 
 class CardStat extends StatefulWidget {
-  const CardStat(
-      {Key? key,
-      required this.known,
-      required this.unknown,
-      required this.endTraining})
-      : super(key: key);
+  const CardStat({
+    Key? key,
+    required this.known,
+    required this.unknown,
+    required this.endTraining,
+    required this.knownWords,
+  }) : super(key: key);
   final double known, unknown;
   final Function endTraining;
+  final int knownWords;
 
   @override
   State<CardStat> createState() => _CardStatState();
@@ -86,11 +88,37 @@ class _CardStatState extends State<CardStat> {
                                   ],
                                 ),
                               ),
-                              const Divider(
-                                color: Colors.white,
-                                thickness: 2,
-                                endIndent: 25,
-                                indent: 25,
+                              Row(
+                                children: [
+                                  const Expanded(
+                                    child: Divider(
+                                      color: Colors.white,
+                                      thickness: 2,
+                                      endIndent: 10,
+                                      indent: 25,
+                                    ),
+                                  ),
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      border: Border.all( color: Colors.white)
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text("${widget.knownWords}",
+                                          style: const TextStyle(
+                                              fontSize: 20, color: Colors.white)),
+                                    ),
+                                  ),
+                                  const Expanded(
+                                    child: Divider(
+                                      color: Colors.white,
+                                      thickness: 2,
+                                      endIndent: 25,
+                                      indent: 10,
+                                    ),
+                                  ),
+                                ],
                               ),
                               Padding(
                                 padding: const EdgeInsets.only(right: 15),

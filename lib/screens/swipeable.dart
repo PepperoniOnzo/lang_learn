@@ -13,6 +13,7 @@ class SwipAble extends StatefulWidget {
 
 class _SwipAbleState extends State<SwipAble> {
   double known = 0, unknown = 0;
+  int knownWords = 0;
   @override
   Widget build(BuildContext context) {
     final arguments = ModalRoute.of(context)?.settings.arguments as List;
@@ -38,14 +39,20 @@ class _SwipAbleState extends State<SwipAble> {
     }
 
     swipeRight(int index) {
+      if (words[index].rate >= 2) {
+        setState(() {
+          knownWords++;
+        });
+      } else {
+        setState(() {
+          known += 0.1;
+        });
+      }
       if (_isPractice) {
         if (words[index].rate != 3) {
           words[index].rate += 1;
         }
       }
-      setState(() {
-        known += 0.1;
-      });
     }
 
     List<Widget> cards = List.generate(words.length, ((index) {
@@ -61,21 +68,24 @@ class _SwipAbleState extends State<SwipAble> {
       onWillPop: () async {
         return (await showDialog(
               context: context,
-              builder: (context) => AlertDialog(              
+              builder: (context) => AlertDialog(
                 title: Text('Return to main menu?'),
-                content: Text('Your progress will be lost', textAlign: TextAlign.center,),
+                content: Text(
+                  'Your progress will be lost',
+                  textAlign: TextAlign.center,
+                ),
                 actions: <Widget>[
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       TextButton(
-                    onPressed: () => Navigator.of(context).pop(false),
-                    child:  Text('No'),
-                  ),
-                  TextButton(
-                    onPressed: () => Navigator.of(context).pop(true),
-                    child:  Text('Yes'),
-                  ),
+                        onPressed: () => Navigator.of(context).pop(false),
+                        child: Text('No'),
+                      ),
+                      TextButton(
+                        onPressed: () => Navigator.of(context).pop(true),
+                        child: Text('Yes'),
+                      ),
                     ],
                   )
                 ],
@@ -90,7 +100,10 @@ class _SwipAbleState extends State<SwipAble> {
             height: MediaQuery.of(context).size.height * 0.7,
             child: Stack(alignment: Alignment.center, children: [
               CardStat(
-                  known: known, unknown: unknown, endTraining: endTraining),
+                  known: known,
+                  unknown: unknown,
+                  endTraining: endTraining,
+                  knownWords: knownWords),
               Stack(
                 children: cards,
               ),
